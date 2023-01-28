@@ -27,6 +27,12 @@ jobs:
         pip install pylint
         pip install pytest
         pip install -U sphinx
+      
+    - name: Running Pylint
+      run: pylint src
+
+    - name: Running Pytest
+      run: pytest --cov
 
     - name: Build package
       run: poetry build
