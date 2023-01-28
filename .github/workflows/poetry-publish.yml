@@ -22,6 +22,15 @@ jobs:
         apt install python3
         pip install poetry
         pip install cachecontrol
+        pip install pylint
+        pip install pytest
+    
+    - name: Running Pylint
+      run: pylint src
+
+    - name: Running Pytest
+      run: pytest --cov
+
     - name: Config Authentication
       run: poetry config http-basic.pypi lappis lappis
     - name: Build package
