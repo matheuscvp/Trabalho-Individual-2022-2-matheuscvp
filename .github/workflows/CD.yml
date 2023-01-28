@@ -1,0 +1,33 @@
+name: Package Deploy
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set Up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.8'
+    - name: Install Dependencies
+      run: |
+        sudo apt-get install doxygen -y
+        pip install poetry
+        pip install cachecontrol
+
+    - name: Configure authentication
+      run: poetry config http-basic lappis lappis
+
+    - name: Build Package
+      run: poetry build
+
+    - name: Deploy Documentation
+      run: sphinx-build -b html docs/source docs/build
+
+    - name: Publish package
+      run: poetry publish

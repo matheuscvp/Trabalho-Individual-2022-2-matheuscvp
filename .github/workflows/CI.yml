@@ -1,35 +1,42 @@
-name: Upload Package
+name: Package Analysis
 
 on:
-  release:
-    types: [published]
-
-permissions:
-  contents: read
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
 
 jobs:
-  deploy:
+  analysis:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: "true"
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: '3.8'
     - name: Install dependencies
       run: |
-        apt install python3
+        sudo apt-get install doxygen -y
         pip install poetry
         pip install cachecontrol
         pip install pylint
         pip install pytest
-    
-    - name: Running Pylint
-      run: pylint src
+      shell: bash
 
     - name: Running Pytest
       run: pytest --cov
 
     - name: Build package
       run: poetry build
+    
+    - name: Build Documentation
+      run: | 
+        doxygen Doxyfile
+        sphinx-quickstart docs
+        sphinx-build -b html docs/source docs/build
