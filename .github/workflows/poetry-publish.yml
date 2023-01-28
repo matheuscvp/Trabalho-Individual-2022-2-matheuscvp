@@ -1,9 +1,6 @@
 name: Upload Package
 
 on:
-  push:
-    branches:
-      - main
   release:
     types: [published]
 
@@ -22,9 +19,11 @@ jobs:
         python-version: '3.x'
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        apt install python-poetry
+        apt install python3
+        pip install poetry
+        pip install cachecontrol
+    - name: Config Authentication
+      run: poetry config http-basic.pypi lappis lappis
     - name: Build package
       run: poetry build
     - name: Publish package
