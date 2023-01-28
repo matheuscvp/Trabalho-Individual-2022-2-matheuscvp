@@ -22,18 +22,15 @@ jobs:
         python-version: '3.8'
     - name: Install dependencies
       run: |
-        sudo apt-get install doxygen -y
         pip install poetry
         pip install cachecontrol
         pip install pylint
         pip install pytest
-        sudo apt-get install python-sphinx
+        pip install -U sphinx
 
     - name: Build package
       run: poetry build
     
     - name: Build Documentation
       run: | 
-        doxygen Doxyfile
-        sphinx-quickstart docs
         sphinx-build -b html docs/source docs/build

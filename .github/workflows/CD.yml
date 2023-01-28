@@ -16,12 +16,11 @@ jobs:
         python-version: '3.8'
     - name: Install Dependencies
       run: |
-        sudo apt-get install doxygen -y
         pip install poetry
         pip install cachecontrol
 
     - name: Configure authentication
-      run: poetry config http-basic lappis lappis
+      run: poetry config http-basic.pypi lappis lappis
 
     - name: Build Package
       run: poetry build
