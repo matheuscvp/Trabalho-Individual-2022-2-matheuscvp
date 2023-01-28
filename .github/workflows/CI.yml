@@ -31,9 +31,5 @@ jobs:
     - name: Running Pytest
       run: pytest --cov
 
-    - name: Config Authentication
-      run: poetry config http-basic.pypi lappis lappis
     - name: Build package
       run: poetry build
-    - name: Publish package
-      run: poetry publish
