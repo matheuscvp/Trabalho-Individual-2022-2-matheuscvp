@@ -27,8 +27,7 @@ jobs:
         pip install cachecontrol
         pip install pylint
         pip install pytest
-        apt install python-sphinx
-      shell: bash
+        sudo apt-get install python-sphinx
 
     - name: Build package
       run: poetry build
