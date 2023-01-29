@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Trabalho Individual Matheus Pinheiro"
+name = "Trabalho_Individual_Matheus_Pinheiro"
 version = "0.1.0"
 description = "Publicação da biblioteca"
 authors = ["Matheus Pinheiro <matheuscvp12@gmail.com>"]

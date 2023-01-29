@@ -18,9 +18,10 @@ jobs:
       run: |
         pip install poetry
         pip install cachecontrol
+        pip install -U sphinx
 
     - name: Configure authentication
-      run: poetry config http-basic.pypi lappis lappis
+      run: poetry config http-basic.pypi matheuscvp ${{secrets.PYPIPASSWORD}}
 
     - name: Build Package
       run: poetry build
