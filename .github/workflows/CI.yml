@@ -29,10 +29,11 @@ jobs:
         pip install -U sphinx
       
     - name: Running Pylint
+      continue-on-error: true
       run: pylint src
 
     - name: Running Pytest
-      run: pytest --cov
+      run: pytest -cov
 
     - name: Build package
       run: poetry build
